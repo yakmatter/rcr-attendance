@@ -1,0 +1,16 @@
+<div class="column">
+  <div class="ui {{if showLabel "tiny" "mini"}} {{labelColor}} statistic">
+    {{#if showLabel}}
+      <div class="label">
+        {{label}}
+      </div>
+    {{/if}}
+    <div class="value">
+      {{#if currentAttendances.length}}
+        {{attended.length}} of {{currentAttendances.length}} ({{formattedPercentAttended}}%)
+      {{else}}
+        &mdash;
+      {{/if}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<div class="ui very relaxed items">
+  {{#each model as | program |}}
+    {{nav-item route="home.programs.program.teams" model=program}}
+  {{/each}}
+</div>
+{{outlet}}

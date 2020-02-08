@@ -1,0 +1,17 @@
+<div class="ui very relaxed items">
+  {{#if session.user.isAdmin}}
+    {{nav-item
+      route="home.programs.program.teams.team.skaters"
+      model=model
+      name="Skaters"
+      logo="assets/images/skater.png"
+    }}
+  {{/if}}
+  {{nav-item
+    route="home.programs.program.teams.team.events"
+    model=model
+    name="Sign In"
+    logo="assets/images/event.png"
+  }}
+</div>
+{{outlet}}

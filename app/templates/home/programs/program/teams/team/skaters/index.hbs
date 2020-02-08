@@ -1,0 +1,29 @@
+<table class="ui very basic celled table">
+  <thead>
+    <tr>
+      <td>
+        Skater
+      </td>
+      <td>
+        Attendance
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model as | skater |}}
+      <tr>
+        <td>
+          {{#link-to "home.programs.program.teams.team.skaters.skater" skater}}
+            {{skater.displayName}}
+          {{/link-to}}
+        </td>
+        <td>
+          {{attendance-count attendances=skater.attendances showLabel=false}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+
+{{outlet}}

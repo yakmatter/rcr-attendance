@@ -1,0 +1,41 @@
+{{#if isAdmin}}
+  {{create-event team=team createEvent=(action "createEvent")}}
+  <br>
+  <button {{action "createDummyEvents"}}>Create Dummy Events</button>
+{{/if}}
+<table class="ui very basic celled table">
+  <thead>
+    <tr>
+      <td>
+        Event
+      </td>
+      <td>
+        Status
+      </td>
+      <td>
+        Attended
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each events as | event |}}
+      <tr>
+        <td>
+          {{#link-to "home.programs.program.teams.team.events.event" event}}
+            {{event.name}}
+          {{/link-to}}
+        </td>
+        <td>
+          {{event-status event=event}}
+        </td>
+        <td>
+          {{attendance-count attendances=event.attendances showLabel=false}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+
+
+{{outlet}}

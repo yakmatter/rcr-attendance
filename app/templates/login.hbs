@@ -1,0 +1,34 @@
+<div class="ui segment center-content">
+  <form class="ui form centered-content" {{action "authenticate" on="submit"}}>
+    <div class="field">
+      <label for="identification">Username</label>
+      {{input
+        id="identification"
+        placeholder="Enter Login"
+        value=identification
+        autocorrect="off"
+        autocapitalize="none"
+      }}
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      {{input
+        id="password"
+        placeholder="Enter Password"
+        type="password"
+        value=password
+        autocorrect="off"
+        autocapitalize="none"
+      }}
+    </div>
+
+    {{#if errorMessage}}
+      <div class="ui red message">
+        {{errorMessage.message}}
+      </div>
+    {{/if}}
+    <div class="ui-segment">
+      <button class="fluid ui button right item" type="submit">Login</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,6 @@
+{{#if notify.message}}
+  <div class="ui {{notify.messageClass}} message">
+    <i class="close icon" {{action "close"}} tabindex="0"></i>
+    <p>{{notify.message}}</p>
+  </div>
+{{/if}}

@@ -1,0 +1,43 @@
+<h3>{{skater.team.name}}</h3>
+<h4>{{skater.derbyName}} &mdash; {{skater.name}}</h4>
+
+<table class="ui very basic celled table">
+  <thead>
+    <tr>
+      <td>
+        Event
+      </td>
+      <td>
+        Attended
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each skater.attendances as | attendance |}}
+      <tr>
+        <td>
+          {{#link-to "home.programs.program.teams.team.events.event" skater.team attendance.event}}
+            {{attendance.event.name}}
+          {{/link-to}}
+        </td>
+        <td>
+          {{#if attendance.event.hasStarted}}
+            {{#if attendance.attended}}
+              <div class="ui green horizontal label">Present</div>
+            {{else}}
+              <div class="ui red horizontal label">Absent</div>
+            {{/if}}
+          {{else}}
+            <div class="ui gray horizontal label">&mdash;</div>
+          {{/if}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+<div>
+  <div class="ui two column centered grid">
+    {{attendance-count attendances=skater.attendances}}
+  </div>
+</div>
+{{outlet}}

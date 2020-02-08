@@ -1,0 +1,9 @@
+<div class="ui relaxed items">
+  {{#each model as | team |}}
+    {{nav-item
+      route="home.programs.program.teams.team"
+      model=team
+    }}
+  {{/each}}
+</div>
+{{outlet}}

@@ -1,0 +1,75 @@
+<div class="ui fixed menu">
+  {{#link-to "index" class="ui item small"}}
+    <div class="ui tiny image">
+      <img src="./assets/images/rose-city-logo.png" alt="logo" class="ui small image m-3">
+    </div>
+  {{/link-to}}
+  {{#if header.event.name}}
+    <h2 class="ui item selected-event">
+      <i class="calendar alternate icon"></i>
+      <div class="content">
+        {{header.event.name}}
+      </div>
+    </h2>
+  {{/if}}
+
+  {{!-- <div class="ui tiny steps">
+    {{#if header.team}}
+      {{#link-to
+        "home.programs.program.teams.team"
+        header.team.program
+        header.team
+        (query-params preventTransitionToEvent=true)
+        class="step"
+      }}
+        <img src={{header.team.logo}} alt="logo" class="ui mini image m-3">
+        <div class="content">
+          <div class="title">{{header.team.name}}</div>
+        </div>
+      {{/link-to}}
+    {{else}}
+      <div class="step">
+        <img src={{header.team.program.logo}} alt="logo" class="ui mini image m-3">
+        <div class="content">
+          <div class="title">{{header.team.program.name}}</div>
+        </div>
+      </div>
+    {{/if}}
+    {{#if header.event}}
+      <div class="step">
+        <i class="calendar alternate icon"></i>
+        <div class="content">
+          <div class="title">{{header.event.name}}</div>
+        </div>
+      </div>
+      <div class="step">
+        <i class="clock icon"></i>
+        <div class="content">
+          <div class="title">{{event-status event=header.event}}</div>
+        </div>
+      </div>
+    {{/if}}
+  </div> --}}
+
+  {{!-- {{bgr-breadcrumbs className="ui item big breadcrumb" itemClassName="section"}} --}}
+  {{#if session.isAuthenticated}}
+    <div class="right item hide-mobile">
+      <button {{action "invalidateSession"}} class="ui right basic button">
+        <i class="icon lock {{if session.user.isAdmin "open"}}"></i>
+        Logout
+      </button>
+    </div>
+  {{/if}}
+  {{#if shouldShowHomeButton}}
+    {{#link-to "index" class="ui right item home-button show-mobile"}}
+      <div class="ui tiny image">
+        <img src="./assets/icons/home.svg" alt="logo" class="ui small image">
+      </div>
+    {{/link-to}}
+  {{/if}}
+</div>
+
+{{rcr-notify}}HELLO
+<div class="ui main container app-content rcr-app-content">
+  {{outlet}}
+</div>

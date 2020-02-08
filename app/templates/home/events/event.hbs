@@ -1,0 +1,70 @@
+{{!-- {{event-status event=event}}
+
+<div class="ui center aligned vertical segment">
+  <h3>
+    {{event.name}}
+  </h3>
+  <div>
+    {{moment-format event.startTime "MMMM D YYYY h:mm A"}}
+    &mdash;
+    {{moment-format event.endTime "h:mm A"}}
+  </div>
+</div> --}}
+
+<h4>Are you a guest skater?</h4>
+{{#power-select
+  placeholder="Enter your name to add yourself to this practice"
+  search=(action "skaterSearch")
+  selected=selected
+  onchange=(action "addSkater")
+  as | skater |
+}}
+  {{skater.displayName}}
+{{/power-select}}
+<table class="ui very basic celled table event-table">
+  <thead>
+    <tr>
+      <th class="event-table-cell">
+        Skater
+      </th>
+      <th class="event-table-cell" colspan="2">
+        Attendance
+      </th>
+      {{!-- {{#if session.user.isAdmin}}
+        <th class="event-table-cell">
+          History
+        </th>
+      {{/if}} --}}
+    </tr>
+  </thead>
+  <tbody>
+    {{#each attendances as | attendance |}}
+      {{event-attendee
+        event=event
+        attendance=attendance
+        markAttendance=(action "markAttendance")
+        markOffSkates=(action "markOffSkates")
+        showRelatedEvents=(action "showRelatedEvents")
+      }}
+    {{/each}}
+  </tbody>
+</table>
+
+{{#if session.user.isAdmin}}
+  {{#ui-dropdown class="selection error" selected=selectedType onChange=(action "deleteEvent")}}
+    <div>Delete Event</div>
+    <div class="menu">
+      {{#each dropdownOptions as | dropdownOption |}}
+        <div data-value={{dropdownOption.id}} class="item">
+          {{dropdownOption.label}}
+        </div>
+      {{/each}}
+    </div>
+  {{/ui-dropdown}}
+{{/if}}
+
+{{!-- <div class="ui center aligned vertical segment">
+  <div class="ui center aligned vertical segment">
+    {{attendance-count attendances=event.attendances showLabel=true label="Skaters Attending"}}
+  </div>
+</div> --}}

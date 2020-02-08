@@ -1,0 +1,10 @@
+{{#bgr-breadcrumbs-item as | linkClassName |}}
+  {{#if isCurrentRoute}}
+    {{name}}
+  {{else}}
+    {{#link-to route class=linkClassName}}
+      {{name}}
+    {{/link-to}}
+    <i class="right chevron icon divider"></i>
+  {{/if}}
+{{/bgr-breadcrumbs-item}}

@@ -1,0 +1,32 @@
+{{#ember-wormhole to="wormhole-for-sidebar-items"}}
+  {{#each model as | event |}}
+    {{#sidebar-nav-item route="home.events.event" model=event}}
+      <div class="middle aligned content">
+        <div class="header">
+          {{moment-format event.startTime "h:mm A"}} &nbsp; &mdash; &nbsp;
+          {{event.type}}
+        </div>
+        <div class="description">
+          {{#each event.teams as | team |}}
+            <div class="ui tiny image sidebar-logo x-sidebar-team {{team.className}}">
+              <img src={{team.logo}} alt="logo">
+            </div>
+          {{/each}}
+          <div>
+            {{event-status event=event}}
+          </div>
+        </div>
+      </div>
+    {{/sidebar-nav-item}}
+  {{else}}
+    <div class="ui item small">
+      <div class="middle aligned content">
+        <div class="header">
+          No Events Today
+        </div>
+      </div>
+    </div>
+  {{/each}}
+{{/ember-wormhole}}
+
+{{outlet}}

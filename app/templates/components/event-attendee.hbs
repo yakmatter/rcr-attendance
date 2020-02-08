@@ -1,0 +1,55 @@
+<tr {{action "showRelatedEvents" attendance}} tabindex="-1">
+
+  <td class="event-table-cell">
+    <div class="event-attendee">
+      <div class="event-attendee-team {{attendance.skater.team.className}}">
+        <img src={{attendance.skater.team.logo}} alt="logo" class="ui mini image m-3">
+      </div>
+      <div class="event-attendee-skater">
+        <div class="event-attendee-skater-name">{{attendance.skater.displayName}}</div>
+      </div>
+    </div>
+  </td>
+  <td class="event-attendee-attended event-table-cell"  colspan="2">
+    <div class="ui {{if attendance.attended "blue" "gray"}} button">
+      <i class="calendar check icon"></i> {{if attendance.attended "Checked In" "Check In"}}
+    </div>
+  </td>
+  {{!-- {{#if session.user.isAdmin}}
+    <td class="event-table-cell">
+      {{#link-to "home.programs.program.teams.team.skaters.skater" attendance.skater class="event-attendee"}}
+        <i class="address card big icon"></i>
+      {{/link-to}}
+    </td>
+  {{/if}} --}}
+
+</tr>
+
+{{#if attendance.shouldShowRelatedEvents}}
+  {{#each attendance.relatedAttendances as | relatedAttendance |}}
+    {{#if relatedAttendance.event.isToday}}
+      <tr>
+        <td class="event-table-cell">
+          {{relatedAttendance.event.name}}
+        </td>
+        <td class="event-table-cell">
+          {{ui-checkbox
+            class="checkbox"
+            label=(if session.user.isAdmin "Skater is present" "I'm here")
+            checked=relatedAttendance.attended
+            onChange=(action "markAttendance" relatedAttendance)
+          }}
+        </td>
+        <td class="event-table-cell">
+          {{ui-checkbox
+            disabled=(not relatedAttendance.attended)
+            class="checkbox"
+            label="Off Skates"
+            checked=relatedAttendance.offSkates
+            onChange=(action "markOffSkates" relatedAttendance)
+          }}
+        </td>
+      </tr>
+    {{/if}}
+  {{/each}}
+{{/if}}

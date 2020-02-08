@@ -1,0 +1,17 @@
+<div class="volunteers">
+  {{#ember-wormhole to="wormhole-for-sidebar-items" class="volunteers-sidebar"}}
+    <table class="table volunteers-list">
+      <tbody>
+        {{#each model as | volunteer |}}
+          <tr>
+            <td>{{volunteer.name}}</td>
+            <td>{{volunteer.pin}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{/ember-wormhole}}
+  <div class="volunteers-content">
+    <iframe src="https://www.volgistics.com/ex/touch.dll/?FROM=19883&PW=15975180"></iframe>
+  </div>
+</div>

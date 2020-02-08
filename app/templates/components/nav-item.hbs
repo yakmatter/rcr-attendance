@@ -1,0 +1,23 @@
+{{#link-to
+  route
+  model
+  (query-params preventTransitionToEvent=true)
+  class="ui item"
+}}
+  <div class="ui tiny image">
+    {{#if logo}}
+      <img src={{logo}} alt="logo" class="m-3">
+    {{else}}
+      <img src={{model.logo}} alt="logo" class="m-3">
+    {{/if}}
+  </div>
+  <div class="middle aligned content">
+    <div class="header">
+      {{#if name}}
+        {{name}}
+      {{else}}
+        {{model.name}}
+      {{/if}}
+    </div>
+  </div>
+{{/link-to}}

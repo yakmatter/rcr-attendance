@@ -1,0 +1,11 @@
+{{#if event.isReady}}
+  Starting Soon
+{{else if event.isNext}}
+  Up Next
+{{else if event.isNow}}
+  Now
+{{else if event.hasEnded}}
+  Completed
+{{else}}
+  Starting Later
+{{/if}}
