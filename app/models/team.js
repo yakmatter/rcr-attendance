@@ -9,7 +9,8 @@ export default Model.extend({
   logo: attr('string'),
   program: belongsTo('program'),
   skaters: hasMany('skater'),
-  sortOrder: attr('number')
+  sortOrder: attr('number'),
+  isHomeTeam: true
 }).reopen({
   className: computed('name', function() {
     // force string or undefined will blow up dasherize

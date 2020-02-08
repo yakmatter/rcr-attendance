@@ -22,11 +22,12 @@ export default Route.extend({
         promises[attendance.id] = attendance.get('skater');
       });
       return hash(promises).then(results => {
-        const teamIds = event.hasMany('teams').ids();
+        const eventTeamIds = event.hasMany('teams').ids();
         attendances.forEach(attendance => {
           const skater = results[attendance.id];
           let sortName = skater.get('displayName');
-          if (!teamIds.includes(skater.belongsTo('team').id())) {
+          const skaterTeamIds = skater.hasMany('teams').ids();
+          if (skaterTeamIds.every(skaterTeamId => !eventTeamIds.includes(skaterTeamId))) {
             sortName = `_${sortName}`;
             attendance.set('isGuestSkater', true);
           }

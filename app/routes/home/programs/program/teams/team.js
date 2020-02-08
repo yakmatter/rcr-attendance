@@ -13,14 +13,8 @@ export default Route.extend({
     if (preventTransitionToEvent === true) {
       return;
     }
-      // if (!this.get('session.user.isAdmin')) {
+      if (!this.get('session.user.isAdmin')) {
         this.transitionTo('home.programs.program.teams.team.events');
-      // }
-  },
-  // actions: {
-  //   willTransition() {
-  //     this.set('header.team', null);
-  //     return true;
-  //   }
-  // }
+      }
+  }
 });

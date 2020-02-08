@@ -5,11 +5,11 @@ import { computed }  from '@ember/object';
 export default Component.extend({
   tagName: '',
   session: service(),
-  isVisitingSkater: computed('event.teams.[]', 'attendance.skater.team', function() {
+  isVisitingSkater: computed('event.teams.[]', 'attendance.skater.teams.[]', function() {
     const eventTeamIds = this.get('event').hasMany('teams').ids();
-    const skaterTeamId = this.get('attendance.skater.team.id');
+    const skaterTeamIds = this.get('attendance.skater').hasMany('teams').ids();
 
-    return eventTeamIds.includes(skaterTeamId) === false;
+    return skaterTeamIds.every(skaterTeamId => eventTeamIds.includes(skaterTeamId) === false);
   }),
   // attendanceCount: computed('event')
   actions: {

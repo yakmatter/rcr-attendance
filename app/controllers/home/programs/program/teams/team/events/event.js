@@ -35,14 +35,15 @@ export default Controller.extend({
       const skaterId = attendance.belongsTo('skater').id();
       this.markAttendance(event, attendance);
 
-      attendance.get('skater.team').then(team => {
-        this.store.query('event', { team: team.id, isToday: true }).then(eventsToday => {
-          eventsToday = eventsToday.filter(eventToday => eventToday.id !== event.id);
-          eventsToday.forEach(eventToday => {
-            eventToday.get('attendances').then(attendances => {
-              attendances.filter(attendance => attendance.belongsTo('skater').id() === skaterId).forEach(attendance => {
-
-                this.markAttendance(eventToday, attendance);
+      attendance.get('skater.teams').then(teams => {
+        teams.forEach(team => {
+          this.store.query('event', { team: team.id, isToday: true }).then(eventsToday => {
+            eventsToday = eventsToday.filter(eventToday => eventToday.id !== event.id);
+            eventsToday.forEach(eventToday => {
+              eventToday.get('attendances').then(attendances => {
+                attendances.filter(attendance => attendance.belongsTo('skater').id() === skaterId).forEach(attendance => {
+                  this.markAttendance(eventToday, attendance);
+                });
               });
             });
           });
