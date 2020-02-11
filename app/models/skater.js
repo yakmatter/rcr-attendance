@@ -7,7 +7,6 @@ const { Model, hasMany, attr } = DS;
 export default Model.extend({
   name: attr('string'),
   derbyName: attr('string'),
-  teamName: attr('string'),
   teams: hasMany('team'),
   attendances: hasMany('attendance')
 }).reopen({
