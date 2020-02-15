@@ -21,9 +21,7 @@ export default Component.extend({
   eventTypes: null,
   selectedEventType: null,
   userChangedEventName: null,
-  availableTeams: computed('team.program.teams', function() {
-
-  }),
+  availableTeams: null,
   autoEventName() {
     const startTime = this.get('startTime');
     if (isPresent(startTime) && !this.get('userChangedEventName')) {
@@ -77,7 +75,8 @@ export default Component.extend({
   setAvailableTeams() {
     const currentTeam = this.get('team');
     this.get('team.program.teams').then(teams => {
-      let availableTeams = teams.map(team => {
+      const isHomeTeam = currentTeam.get('isHomeTeam');
+      let availableTeams = teams.filter(team => team.get('isHomeTeam') === isHomeTeam).map(team => {
         const isCurrentTeam = team.get('id') === currentTeam.get('id');
         team.set('_isSelected', isCurrentTeam);
         team.set('_isDisabled', isCurrentTeam);
