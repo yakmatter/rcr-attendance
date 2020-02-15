@@ -1,4 +1,5 @@
 import Route from '@ember/routing/route';
+import moment from 'moment';
 
 export default Route.extend({
   refreshTime: 60 * 1000,
@@ -12,7 +13,11 @@ export default Route.extend({
   },
   fetchEvents() {
     return this.store.query('event', { isToday: true }).then(events => {
-      return events.sortBy('startTime');
+      return events.filter(event => {
+        // only show the last coupld of completed events
+        const isOld = moment(event.get('startTime')).isSameOrBefore(moment().subtract(90, 'minutes'));
+        return !isOld;
+      }).sortBy('startTime');
     });
   },
   actions:{
