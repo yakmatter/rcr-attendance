@@ -61,6 +61,9 @@ export default Component.extend({
         credits: 1
       };
       this.get('createEvent')(event);
+    },
+    updateName(event) {
+      this.set('name', event.target.value);
     }
   },
   canCreateEvent: computed('name', 'startTime', 'endTime', 'team', function() {
