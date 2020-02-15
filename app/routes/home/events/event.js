@@ -6,7 +6,7 @@ import { hash } from 'rsvp';
 export default Route.extend(ErrorHandler, {
   header: service(),
   model(params) {
-    return this.store.findRecord('event', params.event_id);
+    return this.store.findRecord('event', params.event_id, { reload: true });
   },
   afterModel(event) {
     this.set('header.event', event);
@@ -17,7 +17,9 @@ export default Route.extend(ErrorHandler, {
       if skater is not on one of the event teams,
       prepend `_sortName` to force guest skaters to the top
      */
-    return event.get('attendances').then(attendances => {
+    const query = { _id: event.hasMany('attendances').ids() };
+    // use store, as event.get('attendances') was failing on subsequent revisits
+    return this.store.query('attendance', query).then(attendances => {
       attendances = attendances.toArray();
       attendances.forEach(attendance => {
         promises[attendance.id] = attendance.get('skater');
