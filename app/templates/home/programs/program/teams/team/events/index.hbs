@@ -1,7 +1,9 @@
 {{#if isAdmin}}
   {{create-event team=team createEvent=(action "createEvent")}}
-  <br>
-  <button {{action "createDummyEvents"}}>Create Dummy Events</button>
+  {{#if canCreateDummyEvents}}
+    <br>
+    <button {{action "createDummyEvents"}}>Create Dummy Events</button>
+  {{/if}}
 {{/if}}
 <table class="ui very basic celled table">
   <thead>
@@ -35,7 +37,5 @@
     {{/each}}
   </tbody>
 </table>
-
-
 
 {{outlet}}
