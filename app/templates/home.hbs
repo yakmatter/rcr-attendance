@@ -1,32 +1,9 @@
 <div class="custom-sidebar">
-  <div class="fluid ui buttons">
-    {{#link-to
-      "home.events"
-      class="ui blue button"
-    }}
-      Events
-    {{/link-to}}
-    {{#if session.user.isAdmin}}
-      {{#link-to
-        "home.programs"
-        class="ui blue button"
-      }}
-        Teams
-      {{/link-to}}
-    {{/if}}
-  </div>
   <div id="wormhole-for-sidebar-items" class="ui items"></div>
 </div>
-
 
 <div class="ui one column centered grid main-content">
   <div class="column">
     {{outlet}}
-    {{#if session.user.isAdmin}}
-      <div>
-        <br>
-        <button class="ui button primary" {{action "downloadReport"}}>Download all attendance data</button>
-      </div>
-    {{/if}}
   </div>
 </div>

@@ -41,8 +41,6 @@ export default Controller.extend({
     hiddenElement.target = '_blank';
     hiddenElement.download = `${filename}.csv`;
     hiddenElement.click();
-    // link.click();
-    // document.removeChild(hiddenElement);
   },
 
   actions: {

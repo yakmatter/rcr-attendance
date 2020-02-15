@@ -8,7 +8,9 @@
 
 .app-content.rcr-app-content {
   padding-top: 108px;
-  // max-width: 800px !important;
+  &.has-secondary-nav {
+    padding-top: 167px;
+  }
   width: auto;
   height: 100vh;
   display: flex;
@@ -63,6 +65,12 @@
   .selected-event {
     margin: 0;
   }
+}
+
+.ui.fixed.secondary.menu {
+  top: 108px;
+  background-color: white;
+  border-bottom: 1px solid hsl(0, 0%, 90%);
 }
 
 table.ui.table.event-table {

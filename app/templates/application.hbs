@@ -13,45 +13,6 @@
     </h2>
   {{/if}}
 
-  {{!-- <div class="ui tiny steps">
-    {{#if header.team}}
-      {{#link-to
-        "home.programs.program.teams.team"
-        header.team.program
-        header.team
-        (query-params preventTransitionToEvent=true)
-        class="step"
-      }}
-        <img src={{header.team.logo}} alt="logo" class="ui mini image m-3">
-        <div class="content">
-          <div class="title">{{header.team.name}}</div>
-        </div>
-      {{/link-to}}
-    {{else}}
-      <div class="step">
-        <img src={{header.team.program.logo}} alt="logo" class="ui mini image m-3">
-        <div class="content">
-          <div class="title">{{header.team.program.name}}</div>
-        </div>
-      </div>
-    {{/if}}
-    {{#if header.event}}
-      <div class="step">
-        <i class="calendar alternate icon"></i>
-        <div class="content">
-          <div class="title">{{header.event.name}}</div>
-        </div>
-      </div>
-      <div class="step">
-        <i class="clock icon"></i>
-        <div class="content">
-          <div class="title">{{event-status event=header.event}}</div>
-        </div>
-      </div>
-    {{/if}}
-  </div> --}}
-
-  {{!-- {{bgr-breadcrumbs className="ui item big breadcrumb" itemClassName="section"}} --}}
   {{#if session.isAuthenticated}}
     <div class="right item hide-mobile">
       <button {{action "invalidateSession"}} class="ui right basic button">
@@ -68,8 +29,39 @@
     {{/link-to}}
   {{/if}}
 </div>
+{{#if session.user.isAdmin}}
+  <div class="ui fixed secondary white menu">
+    <div class="item">
+      <div class="ui buttons">
+        {{#link-to
+          "home.events"
+          class=(if eventsRouteIsActive "ui blue button" "ui gray button")
+        }}
+          Events
+        {{/link-to}}
+        {{#if session.user.isAdmin}}
+          {{#link-to
+            "home.programs"
+          class=(unless eventsRouteIsActive "ui blue button" "ui gray button")
+          }}
+            Teams
+          {{/link-to}}
+        {{/if}}
+      </div>
+    </div>
+    {{bgr-breadcrumbs className="ui item big breadcrumb" itemClassName="section"}}
+    <div class="right menu">
+      <div class="item">
+        <button class="ui button primary" {{action "downloadReport"}}>
+          <i class="download icon"></i>
+          CSV
+        </button>
+      </div>
+    </div>
+  </div>
+{{/if}}
+{{rcr-notify}}
 
-{{rcr-notify}}HELLO
-<div class="ui main container app-content rcr-app-content">
+<div class="ui main container app-content rcr-app-content {{if session.user.isAdmin "has-secondary-nav"}}">
   {{outlet}}
 </div>
