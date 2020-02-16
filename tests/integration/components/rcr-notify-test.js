@@ -1,26 +1,29 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import { render, click } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | rcr-notify', function(hooks) {
   setupRenderingTest(hooks);
+  hooks.beforeEach(function() {
+    const notifyService = this.owner.lookup('service:notify');
+    this.set('notifyService', notifyService);
+
+  });
 
   test('it renders', async function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
-
     await render(hbs`{{rcr-notify}}`);
+    assert.dom('p').doesNotExist();
 
-    assert.equal(this.element.textContent.trim(), '');
+    this.set('notifyService.message', 'foo');
+    assert.dom('p').hasText('foo');
+  });
 
-    // Template block usage:
-    await render(hbs`
-      {{#rcr-notify}}
-        template block text
-      {{/rcr-notify}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+  test('it closes', async function(assert) {
+    this.set('notifyService.message', 'foo');
+    await render(hbs`{{rcr-notify}}`);
+    assert.dom('p').hasText('foo');
+    await click('.close');
+    assert.dom('p').doesNotExist();
   });
 });
