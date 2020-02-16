@@ -42,11 +42,15 @@ export default Component.extend({
     hiddenElement.click();
   },
 
+  downloadReport() {
+    this.ajax.request('/reports').then(report => {
+      this.downloadAsCsv(report, 'Attendances', true);
+    });
+  },
+
   actions: {
     downloadReport() {
-      this.ajax.request('/reports').then(report => {
-        this.downloadAsCsv(report, 'Attendances', true);
-      });
+      this.downloadReport();
     }
   }
 });
