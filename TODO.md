@@ -3,7 +3,11 @@
 ## To do list
 
 ### Get tests passing again
-Quick fixes with limited volunteer time has left a working app with broken tests. This should probably fall on adam --since he broke them.
+- tests now pass in localhost browser: [http://localhost:4200/tests](http://localhost:4200/tests)
+- `ember test` fails with (not sure why):
+```
+not ok 1 Chrome 80.0 - [undefined ms] - Global error: Uncaught ReferenceError: Ember is not defined at http://localhost:7357/23067392361486/tests/index.html?hidepassed, line 37
+```
 
 ### Allow unfound skaters to be added to DB and event
 Sometimes skaters are not yet in the database.  They should still be able to sign in.
