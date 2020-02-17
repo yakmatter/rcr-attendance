@@ -8,14 +8,14 @@ module('Integration | Component | sidebar-nav-item', function(hooks) {
   setupRenderingTest(hooks);
   hooks.beforeEach(function() {
     const RouterService = Service.extend({
-      currentURL: '',
+      currentURL: 'foo',
     });
     this.owner.register('service:router', RouterService);
   });
 
   test('it renders', async function(assert) {
     await render(hbs`
-      {{#sidebar-nav-item route=""}}
+      {{#sidebar-nav-item route="foo"}}
         template block text
       {{/sidebar-nav-item}}
     `);
