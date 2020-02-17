@@ -1,4 +1,4 @@
-<tr {{action "showRelatedEvents" attendance}} tabindex="-1">
+<tr {{action "showRelatedEvents" attendance}} tabindex="-1" class="event-attendee-row">
 
   <td class="event-table-cell">
     <div class="event-attendee">
@@ -11,8 +11,13 @@
     </div>
   </td>
   <td class="event-attendee-attended event-table-cell"  colspan="2">
-    <div class="ui {{if attendance.attended "blue" "gray"}} button">
-      <i class="calendar check icon"></i> {{if attendance.attended "Checked In" "Check In"}}
+    <div class="ui {{if isCheckedIn "blue" "gray"}} button checkin-button">
+      <i class="calendar check icon"></i>
+      {{#if attendance.event.hasEnded}}
+        {{if isCheckedIn "Attended" "Did Not Attend"}}
+      {{else}}
+        {{if isCheckedIn "Checked In" "Check In"}}
+      {{/if}}
     </div>
   </td>
   {{!-- {{#if session.user.isAdmin}}
@@ -26,15 +31,15 @@
 </tr>
 
 {{#if attendance.shouldShowRelatedEvents}}
-  {{#each attendance.relatedAttendances as | relatedAttendance |}}
+  {{#each attendance.relatedAttendances as | relatedAttendance index |}}
     {{#if relatedAttendance.event.isToday}}
-      <tr>
-        <td class="event-table-cell">
+      <tr class="event-attendee-attendances-row event-attendee-attendances-row-{{index}}">
+        <td class="event-table-cell event-attendee-event-name">
           {{relatedAttendance.event.name}}
         </td>
         <td class="event-table-cell">
           {{ui-checkbox
-            class="checkbox"
+            class="is-present-checkbox"
             label=(if session.user.isAdmin "Skater is present" "I'm here")
             checked=relatedAttendance.attended
             onChange=(action "markAttendance" relatedAttendance)
@@ -43,7 +48,7 @@
         <td class="event-table-cell">
           {{ui-checkbox
             disabled=(not relatedAttendance.attended)
-            class="checkbox"
+            class="off-skates-checkbox"
             label="Off Skates"
             checked=relatedAttendance.offSkates
             onChange=(action "markOffSkates" relatedAttendance)
