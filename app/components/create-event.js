@@ -25,10 +25,10 @@ export default Component.extend({
   autoEventName() {
     const startTime = this.get('startTime');
     if (isPresent(startTime) && !this.get('userChangedEventName')) {
-      const date = moment(startTime).format('MMM D, h:mm A');
+      const date = moment(startTime).format('MM/DD, h:mm A');
       const eventType = this.get('selectedEventType');
       const teamName = eventType === 'practice' ? this.get('team.name') : this.get('team.program.name');
-      let name = `${teamName} - ${eventType} - ${date}`;
+      let name = `${date} - ${teamName} - ${eventType}`;
       this.set('name', name);
     }
   },
