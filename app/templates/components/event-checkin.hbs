@@ -1,29 +1,28 @@
 <div class="ui left aligned container">
-  <div class="ui left action {{if shouldShowUserSearch "input"}} guest-skater-search">
-    <button class="ui blue icon button {{unless shouldShowUserSearch "labeled"}}" {{action "toggleShouldShowUserSearch"}}>
-      <i class="user plus icon"></i>
-      {{unless shouldShowUserSearch "Guest Skater Checkin"}}
+  <div class="ui left action input guest-skater-search">
+    <button class="ui icon button">
+      <i class="search icon"></i>
     </button>
-    {{#if shouldShowUserSearch}}
-      {{#power-select
-        placeholder="Type your name"
-        search=(action "skaterSearch")
-        selected=selected
-        onchange=(action "addSkater")
-        renderInPlace=true
-        loadingMessage=null
-        searchMessage=null
-        noMatchesMessage=null
-        afterOptionsComponent=(component "guest-skater-not-found"
-          noSkatersFound=noSkatersFound
-          select=(readonly publicAPI)
-          addUnfoundSkater=(action "addUnfoundSkater")
-        )
-        as | skater |
-      }}
-        {{skater.displayName}}
-      {{/power-select}}
-    {{/if}}
+    {{#power-select
+      placeholder="Type your name"
+      search=(action "skaterSearch")
+      selected=selected
+      onchange=(action "addSkater")
+      renderInPlace=true
+      loadingMessage=null
+      searchMessage=null
+      noMatchesMessage=null
+      afterOptionsComponent=(component "guest-skater-not-found"
+        noSkatersFound=noSkatersFound
+        select=(readonly publicAPI)
+        addUnfoundSkater=(action "addUnfoundSkater")
+      )
+      as | skater |
+    }}
+      {{skater.derbyName}}
+      {{if (and skater.name skater.derbyName) " -"}}
+      {{skater.name}}
+    {{/power-select}}
   </div>
 </div>
 <table class="ui very basic celled table event-table">
