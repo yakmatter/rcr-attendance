@@ -98,7 +98,7 @@ export default Component.extend({
     },
     addUnfoundSkater(skaterName) {
       const unfoundSkater = this.store.createRecord('skater', {
-        name: 'SKATER NOT IN SYSTEM',
+        name: 'SKATER NOT IN APEX',
         derbyName: skaterName,
         teams: [ this.get('event.teams.firstObject') ]
       });
