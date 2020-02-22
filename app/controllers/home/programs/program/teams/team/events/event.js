@@ -81,7 +81,7 @@ export default Controller.extend({
       if (action === 'delete') {
         const event = this.get('event');
         event.destroyRecord().then(() => {
-          this.transitionToRoute('home.programs.program.teams.team.events');
+          this.transitionToRoute('home.programs');
         });
       }
     }
