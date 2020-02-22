@@ -8,11 +8,11 @@
           {{unless shouldShowInput "Add Me..."}}
         </button>
         {{#if shouldShowInput}}
-          <input value={{userName}} oninput={{mut userName}}>
+          {{input value=(mut userName)}}
           <button class="ui gray button" {{action "toggleShouldShowInput"}}>
             Cancel
           </button>
-          <button class="ui blue button" {{action "addUnfoundSkater" select.searchText}}>
+          <button class="ui blue button" {{action "addUnfoundSkater" userName}}>
             Submit
           </button>
         {{/if}}
