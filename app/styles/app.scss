@@ -16,7 +16,7 @@
   display: flex;
   .ui.items {
     .item {
-      min-width: 300px;
+      min-width: 250px;
       padding: 3rem;
       margin: 0;
       transition: background-color 300ms ease-in;
@@ -43,12 +43,15 @@
       &.active {
         background-color: hsl(200, 50%, 95%);
       }
+      .header.sidebar-header {
+        font-size: 1.1rem;
+      }
       .description {
         display: flex;
         .sidebar-logo {
           flex-grow: 1;
           img {
-            width: 50px;
+            width: 40px;
           }
         }
       }

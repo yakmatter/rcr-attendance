@@ -2,9 +2,8 @@
   {{#each model as | event |}}
     {{#sidebar-nav-item route="home.events.event" model=event}}
       <div class="middle aligned content">
-        <div class="header">
-          {{moment-format event.startTime "h:mm A"}} &nbsp; &mdash; &nbsp;
-          {{event.type}}
+        <div class="header sidebar-header">
+          {{event.name}}
         </div>
         <div class="description">
           {{#each event.teams as | team |}}
