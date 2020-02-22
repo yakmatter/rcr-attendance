@@ -1,9 +1,9 @@
-<tr {{action "showRelatedEvents" attendance}} tabindex="-1" class="event-attendee-row">
+<tr {{action "showRelatedEvents" attendance}} tabindex="-1" class="event-attendee-row" id={{attendance.skater.id}}>
 
   <td class="event-table-cell">
     <div class="event-attendee">
       <div class="event-attendee-team {{attendance.skater.team.className}}">
-        <img src={{attendance.skater.team.logo}} alt="logo" class="ui mini image m-3">
+        <img src={{or attendance.skater.team.logo "./assets/icons/question-circle.svg"}} alt="logo" class="ui mini image m-3">
       </div>
       <div class="event-attendee-skater">
         <div class="event-attendee-skater-name">{{attendance.skater.displayName}}</div>

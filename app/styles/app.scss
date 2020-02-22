@@ -64,6 +64,23 @@
   }
 }
 
+.guest-skater-search {
+  width: 100%;
+  button {
+    height: 44px;
+  }
+  .ember-basic-dropdown {
+    width: 100%;
+    .ember-power-select-trigger {
+      border-radius: 0 4px 4px 0;
+      border-left: none;
+    }
+  }
+  .guest-skater-search-message {
+    padding: 10px;
+  }
+}
+
 .ui.fixed.menu {
   .selected-event {
     margin: 0;

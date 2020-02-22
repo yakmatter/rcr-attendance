@@ -42,8 +42,7 @@ export default Mixin.create(ErrorHandler, {
   },
   setupController(controller) {
     this._super(...arguments);
-    controller.set('_attendances', this.get('attendances'));
-    controller.loadContent();
+    controller.set('attendances', this.get('attendances'));
   },
   actions: {
     willTransition() {

@@ -1,0 +1,27 @@
+<div class="guest-skater-search-message">
+  {{#if select.searchText}}
+    {{#if (not select.results)}}
+      <p>We could not find you in our system.  Would you like to add yourself?</p>
+      <div class="ui left action {{if shouldShowInput "input"}} guest-skater-search">
+        <button class="ui button icon  {{unless shouldShowInput "labeled"}} {{if shouldShowInput "gray" "blue"}}" {{action "toggleShouldShowInput" select.searchText}}>
+          <i class="plus icon"></i>
+          {{unless shouldShowInput "Add Me..."}}
+        </button>
+        {{#if shouldShowInput}}
+          <input value={{userName}} oninput={{mut userName}}>
+          <button class="ui gray button" {{action "toggleShouldShowInput"}}>
+            Cancel
+          </button>
+          <button class="ui blue button" {{action "addUnfoundSkater" select.searchText}}>
+            Submit
+          </button>
+        {{/if}}
+      </div>
+    {{else if select.loading}}
+      Searching...
+    {{/if}}
+  {{else}}
+    {{select.placeholder}}
+  {{/if}}
+</div>
+

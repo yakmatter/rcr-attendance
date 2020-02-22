@@ -1,0 +1,75 @@
+<div class="ui left aligned container">
+  <div class="ui left action {{if shouldShowUserSearch "input"}} guest-skater-search">
+    <button class="ui blue icon button {{unless shouldShowUserSearch "labeled"}}" {{action "toggleShouldShowUserSearch"}}>
+      <i class="user plus icon"></i>
+      {{unless shouldShowUserSearch "Guest Skater Checkin"}}
+    </button>
+    {{#if shouldShowUserSearch}}
+      {{#power-select
+        placeholder="Type your name"
+        search=(action "skaterSearch")
+        selected=selected
+        onchange=(action "addSkater")
+        renderInPlace=true
+        loadingMessage=null
+        searchMessage=null
+        noMatchesMessage=null
+        afterOptionsComponent=(component "guest-skater-not-found"
+          noSkatersFound=noSkatersFound
+          select=(readonly publicAPI)
+          addUnfoundSkater=(action "addUnfoundSkater")
+        )
+        as | skater |
+      }}
+        {{skater.displayName}}
+      {{/power-select}}
+    {{/if}}
+  </div>
+</div>
+<table class="ui very basic celled table event-table">
+  <thead>
+    <tr>
+      <th class="event-table-cell">
+        Skater
+      </th>
+      <th class="event-table-cell" colspan="2">
+        Attendance
+      </th>
+      {{!-- {{#if session.user.isAdmin}}
+        <th class="event-table-cell">
+          History
+        </th>
+      {{/if}} --}}
+    </tr>
+  </thead>
+  <tbody>
+    {{#each attendancesSorted as | attendance |}}
+      {{event-attendee
+        event=event
+        attendance=attendance
+        markAttendance=(action "markAttendance")
+        markOffSkates=(action "markOffSkates")
+        showRelatedEvents=(action "showRelatedEvents")
+      }}
+    {{/each}}
+  </tbody>
+</table>
+
+{{#if session.user.isAdmin}}
+  {{#ui-dropdown class="selection error" selected=selectedType onChange=(action "deleteEvent")}}
+    <div>Delete Event</div>
+    <div class="menu">
+      {{#each dropdownOptions as | dropdownOption |}}
+        <div data-value={{dropdownOption.id}} class="item">
+          {{dropdownOption.label}}
+        </div>
+      {{/each}}
+    </div>
+  {{/ui-dropdown}}
+{{/if}}
+
+{{!-- <div class="ui center aligned vertical segment">
+  <div class="ui center aligned vertical segment">
+    {{attendance-count attendances=event.attendances showLabel=true label="Skaters Attending"}}
+  </div>
+</div> --}}
