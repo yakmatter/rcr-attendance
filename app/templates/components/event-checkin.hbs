@@ -1,8 +1,8 @@
 <div class="ui left aligned container">
   <div class="ui left action input guest-skater-search">
-    <button class="ui icon button">
+    <span class="ui icon button">
       <i class="search icon"></i>
-    </button>
+    </span>
     {{#power-select
       placeholder="Type your name"
       search=(action "skaterSearch")
@@ -12,10 +12,15 @@
       loadingMessage=null
       searchMessage=null
       noMatchesMessage=null
+      closeOnSelect=false
+      onopen=(action "setPowerSelectInstance")
       afterOptionsComponent=(component "guest-skater-not-found"
         noSkatersFound=noSkatersFound
         select=(readonly publicAPI)
         addUnfoundSkater=(action "addUnfoundSkater")
+        addSkater=(action "addSkater")
+        shouldConfirmGuesSkater=shouldConfirmGuesSkater
+        guestSkater=guestSkater
       )
       as | skater |
     }}

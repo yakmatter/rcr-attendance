@@ -1,5 +1,10 @@
 <div class="guest-skater-search-message">
-  {{#if select.searchText}}
+  {{#if shouldConfirmGuesSkater}}
+    <p>You are not a member of this practice.  You can add your self as a "drop in" guest skater.  Just double check that this is the correct practice.</p>
+    <button class="ui blue button" {{action "addGuestSkater" guestSkater}}>
+      Add "{{guestSkater.displayName}}" to this practice.
+    </button>
+  {{else if select.searchText}}
     {{#if (not select.results)}}
       <p>We could not find you in our system.  Would you like to add yourself?</p>
       <div class="ui left action {{if shouldShowInput "input"}} guest-skater-search">
@@ -21,7 +26,7 @@
       Searching...
     {{/if}}
   {{else}}
-    {{select.placeholder}}
+    Type your name
   {{/if}}
 </div>
 

@@ -9,6 +9,6 @@ module('Integration | Component | guest-skater-not-found', function(hooks) {
   test('it renders', async function(assert) {
     await render(hbs`{{guest-skater-not-found}}`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.equal(this.element.textContent.trim(), 'Type your name');
   });
 });

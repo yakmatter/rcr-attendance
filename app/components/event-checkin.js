@@ -48,21 +48,33 @@ export default Component.extend({
       attendance.save();
     },
     skaterSearch(value) {
-      // const skaterIds = this.get('skaterIds');
       return this.store.query('skater', { '$search': value }).then(skaters => {
         return skaters;
-        // return skaters.filter(skater => {
-        //   return !skaterIds.includes(skater.id);
-        // });
       });
     },
+    setPowerSelectInstance(powerSelectInstance) {
+      if (this.powerSelectInstance) {
+        return;
+      }
+      this.set('powerSelectInstance', powerSelectInstance);
+    },
     addSkater(skater) {
+      this.set('shouldConfirmGuesSkater', false);
+      this.set('guestSkater', null);
       const skaterIds = this.get('skaterIds');
       if (skaterIds.includes(skater.id)) {
         this.scrollToAttendance(skater);
+        this.get('powerSelectInstance').actions.close();
         return;
       }
 
+      if (!skater.get('didConfirmGuestSkater')) {
+        this.set('guestSkater', skater);
+        this.set('shouldConfirmGuesSkater', true);
+        return;
+      }
+
+      this.get('powerSelectInstance').actions.close();
       const event = this.get('event');
       const attendance = this.store.createRecord('attendance', {
         skater: skater,
@@ -104,6 +116,7 @@ export default Component.extend({
       });
 
       unfoundSkater.save().then(skater => {
+        skater.set('didConfirmGuestSkater', true);
         this.send('addSkater', skater);
       });
     }

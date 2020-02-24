@@ -2,10 +2,15 @@ import Component from '@ember/component';
 
 export default Component.extend({
   tagName: '',
+  addSkater: () => {},
   addUnfoundSkater: () => {},
   actions: {
     addUnfoundSkater() {
       this.addUnfoundSkater(...arguments);
+    },
+    addGuestSkater(skater) {
+      skater.set('didConfirmGuestSkater', true);
+      this.addSkater(skater);
     },
     toggleShouldShowInput(searchText) {
       this.toggleProperty('shouldShowInput');
