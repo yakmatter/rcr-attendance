@@ -36,6 +36,7 @@
     box-shadow: 5px 0 20px 0 hsla(0, 0%, 0%, 0.1);
     overflow-y: auto;
     margin-bottom: 0;
+    min-width: 350px;
     a.item.small {
       border-bottom: 1px solid hsl(0, 0%, 90%);
       // text-align: center;
@@ -60,7 +61,7 @@
   .main-content {
     overflow-y: auto;
     flex-grow: 1;
-    padding: 3rem 5rem;
+    padding: 3rem 2rem;
   }
 }
 
