@@ -16,8 +16,8 @@ const TYPES = {
 
 export default Model.extend({
   name: attr('string'),
-  startTime: attr('date'),
-  endTime: attr('date'),
+  startTime: attr('string'),
+  endTime: attr('string'),
   credits: attr('number'),
   type: attr('string'),
   teams: hasMany('team'),

@@ -52,8 +52,8 @@ export default Component.extend({
     createEvent() {
       const event = {
         name: this.get('name'),
-        startTime: this.get('startTime'),
-        endTime: this.get('endTime'),
+        startTime: moment(this.get('startTime')).format(),
+        endTime: moment(this.get('endTime')).format(),
         type: this.get('selectedEventType'),
         teams: this.get('selectedTeams'),
         credits: 1
